@@ -30,3 +30,27 @@ class Players < Game
     @player2 = player2
   end
 end
+
+system 'clear'
+
+puts "Welcome to an amazing game :D -> Ruby's Tic Tac Toe"
+puts "Please, give me two names to each player \n \n"
+
+puts 'First player name: '
+player1 = gets.chomp
+
+while player1.empty?
+  puts 'First player name: '
+  player1 = gets.chomp
+end
+
+puts 'Second player name: '
+player2 = gets.chomp.capitalize
+
+while player2.empty?
+  puts 'Second player name: '
+  player2 = gets.chomp.capitalize
+end
+
+game_trial = Players.new(player1, player2)
+game_trial.start
