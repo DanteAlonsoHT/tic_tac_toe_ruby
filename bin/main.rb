@@ -21,6 +21,7 @@ class Game
   end
 end
 
+# Class to include attributes/methods of Game and saving names for each player
 class Players < Game
   attr_reader :player1, :player2
 
@@ -60,6 +61,7 @@ puts "Let's start"
 
 sleep(3)
 
+# To Provide turns for each one player
 players_turn = lambda {
   system 'clear'
   game_trial.display_board
@@ -85,6 +87,7 @@ players_turn = lambda {
   end
 }
 
+# To Check out what is the game result
 players_finish_turn = lambda {
   system 'clear'
   random_result = rand(1...4)
