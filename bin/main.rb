@@ -98,3 +98,5 @@ players_finish_turn = lambda {
     puts "It's a TIE \n \n Game over"
   end
 }
+
+5.times { number_turn > 4 ? players_finish_turn.call : players_turn.call }
