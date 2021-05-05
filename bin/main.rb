@@ -54,3 +54,33 @@ end
 
 game_trial = Players.new(player1, player2)
 game_trial.start
+
+puts "#{game_trial.player1} is going to play 'X', and #{game_trial.player2} will play 'O'"
+puts "Let's start"
+
+sleep(3)
+
+players_turn = lambda {
+  system 'clear'
+  game_trial.display_board
+  puts "It's #{game_trial.player1}'s turn \n"
+  puts "Reminder: You're 'X"
+  puts 'Please select a a number between 1 to 9 according to the board.'
+  x_selected = gets.chomp.to_i
+  until (1..9).include? x_selected
+    puts 'Invalid, please select a number between 1 to 9.'
+    x_selected = gets.chomp.to_i
+  end
+
+  system 'clear'
+
+  game_trial.display_board
+  puts "It's #{game_trial.player2}'s turn \n"
+  puts "Reminder: You're 'O"
+  puts 'Please select a a number between 1 to 9 according to the board.'
+  o_selected = gets.chomp.to_i
+  until (1..9).include? o_selected
+    puts 'Invalid, please select a number between 1 to 9.'
+    o_selected = gets.chomp.to_i
+  end
+}
