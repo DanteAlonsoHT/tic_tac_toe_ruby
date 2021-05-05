@@ -84,3 +84,17 @@ players_turn = lambda {
     o_selected = gets.chomp.to_i
   end
 }
+
+players_finish_turn = lambda {
+  system 'clear'
+  random_result = rand(1...4)
+
+  case random_result
+  when 1
+    puts "#{game_trial.player1} won the Ruby's Tic Tac Toe"
+  when 2
+    puts "#{game_trial.player2} won the Ruby's Tic Tac Toe"
+  else
+    puts "It's a TIE \n \n Game over"
+  end
+}
