@@ -26,7 +26,6 @@ class Players < Game
   attr_reader :player1, :player2
 
   def initialize(player1, player2)
-    super
     @player1 = player1
     @player2 = player2
   end
@@ -38,11 +37,11 @@ puts "Welcome to an amazing game :D -> Ruby's Tic Tac Toe"
 puts "Please, give me two names to each player \n \n"
 
 puts 'First player name: '
-player1 = gets.chomp
+player1 = gets.chomp.capitalize
 
 while player1.empty?
   puts 'First player name: '
-  player1 = gets.chomp
+  player1 = gets.chomp.capitalize
 end
 
 puts 'Second player name: '
@@ -54,16 +53,21 @@ while player2.empty?
 end
 
 game_trial = Players.new(player1, player2)
-game_trial.start
 
-puts "#{game_trial.player1} is going to play 'X', and #{game_trial.player2} will play 'O'"
+puts "\n #{game_trial.player1} is going to play 'X', and #{game_trial.player2} will play 'O'"
 puts "Let's start"
 
 sleep(3)
 
+game_trial.start
+
+# Variable can control the iterations
+number_turn = 0
+
 # To Provide turns for each one player
 players_turn = lambda {
   system 'clear'
+
   game_trial.display_board
   puts "It's #{game_trial.player1}'s turn \n"
   puts "Reminder: You're 'X"
@@ -85,6 +89,7 @@ players_turn = lambda {
     puts 'Invalid, please select a number between 1 to 9.'
     o_selected = gets.chomp.to_i
   end
+  number_turn += 1
 }
 
 # To Check out what is the game result
@@ -102,4 +107,8 @@ players_finish_turn = lambda {
   end
 }
 
-5.times { number_turn > 4 ? players_finish_turn.call : players_turn.call }
+# Game Loop
+players_turn.call while number_turn < 4
+
+# Show results when game finish
+players_finish_turn.call
