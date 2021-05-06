@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
 class Game
+  def initialize(player1, player2); end
+
   def start
     system 'clear'
 
@@ -26,6 +28,7 @@ class Players < Game
   attr_reader :player1, :player2
 
   def initialize(player1, player2)
+    super
     @player1 = player1
     @player2 = player2
   end
