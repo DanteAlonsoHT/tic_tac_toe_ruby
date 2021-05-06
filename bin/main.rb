@@ -26,11 +26,23 @@ end
 # Class to include attributes/methods of Game and saving names for each player
 class Players < Game
   attr_reader :player1, :player2
+  @@marker = []
 
   def initialize(player1, player2)
     super
     @player1 = player1
     @player2 = player2
+    @i = 0
+  end
+
+  def save_marker(move_selected)
+    @move_selected = move_selected
+    @@marker[@i] = move_selected 
+    @i += 1
+  end
+  
+  def see_marker
+    @@marker
   end
 end
 
@@ -61,6 +73,9 @@ puts "\n #{game_trial.player1} is going to play 'X', and #{game_trial.player2} w
 puts "Let's start"
 
 sleep(3)
+
+#Combinations to win
+combinations_likely_to_win = [[1, 2, 3], [2, 5, 8], [3, 6, 9], [4, 5, 6], [1, 4, 7], [1, 5, 9], [3, 5, 7], [7, 8, 9]]
 
 game_trial.start
 
