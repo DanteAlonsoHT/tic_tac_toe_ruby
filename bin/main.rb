@@ -66,6 +66,7 @@ game_trial.start
 
 # Variable can control the iterations
 number_turn = 0
+game_turn = true
 
 # To Provide turns for each one player
 players_turn = lambda {
@@ -92,7 +93,7 @@ players_turn = lambda {
     puts 'Invalid, please select a number between 1 to 9.'
     o_selected = gets.chomp.to_i
   end
-  number_turn += 1
+  number_turn > 2 ? game_turn = false : number_turn += 1
 }
 
 # To Check out what is the game result
@@ -111,7 +112,7 @@ players_finish_turn = lambda {
 }
 
 # Game Loop
-players_turn.call while number_turn < 4
+players_turn.call while game_turn
 
 # Show results when game finish
 players_finish_turn.call
