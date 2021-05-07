@@ -1,5 +1,4 @@
 class Game
-  @move_definetily_repeated = false
   def initialize(_player1, _player2)
     @n = 0
     @moves_used = []
@@ -44,12 +43,12 @@ class Game
   end
 
   def check_moves_repeated(move_likely_repeated)
-    move_definetily_repeated = false
-    return unless @moves_used
+    return false unless @moves_used
 
     @moves_used.each do |value|
-      move_definetily_repeated = true unless value.to_i != move_likely_repeated
+      return true unless value.to_i != move_likely_repeated
     end
+    false
   end
 
   def update_board(pos_selected, new_element)

@@ -72,7 +72,7 @@ player1_turn = lambda {
   puts "\t Reminder: You're 'X'"
   x_selected = gets.chomp.to_i
   move_repeated = game_trial.check_moves_repeated(x_selected)
-  unless ((1..9).include? x_selected) && !move_repeated
+  until ((1..9).include? x_selected) && !move_repeated
     puts "\t Invalid, please select a number between 1 to 9 and don' repeat them."
     x_selected = gets.chomp.to_i
     move_repeated = game_trial.check_moves_repeated(x_selected)
@@ -94,7 +94,7 @@ player2_turn = lambda {
   puts "\t Reminder: You're 'O'"
   o_selected = gets.chomp.to_i
   move_repeated = game_trial.check_moves_repeated(o_selected)
-  unless ((1..9).include? o_selected) && !move_repeated
+  until ((1..9).include? o_selected) && !move_repeated
     puts "\t Invalid, please select a number between 1 to 9 and don' repeat them."
     o_selected = gets.chomp.to_i
     move_repeated = game_trial.check_moves_repeated(o_selected)
