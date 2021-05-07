@@ -1,31 +1,5 @@
 #!/usr/bin/env ruby
 
-class Game
-  @@moves_used = []
-  @move_definetily_repeated = false
-  def initialize(_player1, _player2)
-    @n = 0
-  end
-
-  def start
-    system 'clear'
-
-    # Create Variable to Tic tac toe's board
-    @game_board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-  end
-
-  # Display the Tic tac toe's board
-  def display_board
-    (0..2).each do |i|
-      puts ' +---+---+---+'
-      (0..7).each do |j|
-        print ' | ' if j.even?
-        print @game_board[i][((j * 3) / 7).to_i] if j.odd?
-      end
-      puts i == 2 ? "\n +---+---+---+" : nil
-    end
-  end
-
   def moves_used(move_used)
     @@moves_used[@n] = move_used
     @n += 1
@@ -84,46 +58,65 @@ class Players < Game
   end
 
   def player1_marker
-    @@marker
+    @@marker.permutation(3).to_a
   end
 
   def player2_marker
-    @@marker2
+    @@marker2.permutation(3).to_a
   end
 end
 
 system 'clear'
 
-puts "Welcome to an amazing game :D -> Ruby's Tic Tac Toe"
-puts "Please, give me two names to each player \n \n"
+puts "
+\t    
+\t░██╗░░░░░░░██╗███████╗██╗░░░░░░█████╗░░█████╗░███╗░░░███╗███████╗
+\t░██║░░██╗░░██║██╔════╝██║░░░░░██╔══██╗██╔══██╗████╗░████║██╔════╝
+\t░╚██╗████╗██╔╝█████╗░░██║░░░░░██║░░╚═╝██║░░██║██╔████╔██║█████╗░░
+\t░░████╔═████║░██╔══╝░░██║░░░░░██║░░██╗██║░░██║██║╚██╔╝██║██╔══╝░░
+\t░░╚██╔╝░╚██╔╝░███████╗███████╗╚█████╔╝╚█████╔╝██║░╚═╝░██║███████╗
+\t░░░╚═╝░░░╚═╝░░╚══════╝╚══════╝░╚════╝░░╚════╝░╚═╝░░░░░╚═╝╚══════╝ \n \n"
 
-puts 'First player name: '
+puts "\t to an amazing game :D -> Ruby's Tic Tac Toe"
+puts "\t Please, give me two names to each player \n \n"
+
+puts "First player name: "
 player1 = gets.chomp.capitalize
 
 while player1.empty?
-  puts 'First player name: '
+  puts "\t Invalid name, try again!
+  \n First player name: "
   player1 = gets.chomp.capitalize
 end
 
-puts 'Second player name: '
+puts "Second player name: "
 player2 = gets.chomp.capitalize
 
 while player2.empty?
-  puts 'Second player name: '
+  puts "\t Invalid name, try again!
+  \n Second player name: "
   player2 = gets.chomp.capitalize
 end
 
 game_trial = Players.new(player1, player2)
 
-puts "\n #{game_trial.player1} is going to play 'X', and #{game_trial.player2} will play 'O'"
-puts "Let's start"
+puts "\n \t #{game_trial.player1} is going to play 'X', and #{game_trial.player2} will play 'O'"
+puts "\t Let's start"
 
 sleep(3)
+
+game_trial.start
+
+sleep(2)
 
 # Combinations to win
 combinations_likely_to_win = [[1, 2, 3], [2, 5, 8], [3, 6, 9], [4, 5, 6], [1, 4, 7], [1, 5, 9], [3, 5, 7], [7, 8, 9]]
 
-game_trial.start
+#Create permutations
+combinations_likely_to_win.each do |values_to_win|
+  combinations_likely_to_win += [values_to_win.rotate(2)]
+  combinations_likely_to_win += [values_to_win.rotate(-2)]
+end
 
 # Variable can control the iterations
 iterator = 0
@@ -138,12 +131,12 @@ player1_turn = lambda {
   unless !(winner == 0)
 
     game_trial.display_board
-    puts "It's #{game_trial.player1}'s turn \n"
-    puts "Reminder: You're 'X'"
+    puts "\t It's #{game_trial.player1}'s turn \n"
+    puts "\t Reminder: You're 'X'"
     x_selected = gets.chomp.to_i
     move_repeated = game_trial.check_moves_repeated(x_selected)
     unless (((1..9).include? x_selected) && !move_repeated)
-      puts "Invalid, please select a number between 1 to 9 and don' repeat them."
+      puts "\t Invalid, please select a number between 1 to 9 and don' repeat them."
       x_selected = gets.chomp.to_i
       move_repeated = game_trial.check_moves_repeated(x_selected)
     end
@@ -163,12 +156,12 @@ player2_turn = lambda {
   unless !(winner == 0)
 
     game_trial.display_board
-    puts "It's #{game_trial.player2}'s turn \n"
-    puts "Reminder: You're 'O'"
+    puts "\t It's #{game_trial.player2}'s turn \n"
+    puts "\t Reminder: You're 'O'"
     o_selected = gets.chomp.to_i
     move_repeated = game_trial.check_moves_repeated(o_selected)
     until ((1..9).include? o_selected) && !move_repeated
-      puts "Invalid, please select a number between 1 to 9 and don' repeat them."
+      puts "\t Invalid, please select a number between 1 to 9 and don' repeat them."
       o_selected = gets.chomp.to_i
       move_repeated = game_trial.check_moves_repeated(o_selected)
     end
@@ -185,10 +178,17 @@ player2_turn = lambda {
 
 # Compare results to see if there are winner so far
 check_winner = lambda {
-  if combinations_likely_to_win.include?(game_trial.player1_marker)
-    winner = 1
-  elsif combinations_likely_to_win.include?(game_trial.player2_marker)
-    winner = 2
+
+  game_trial.player1_marker.each do |value|
+    if combinations_likely_to_win.include?(value)
+      winner = 1
+    end
+  end
+
+  game_trial.player2_marker.each do |value|
+    if combinations_likely_to_win.include?(value)
+      winner = 2
+    end
   end
 }
 
@@ -196,13 +196,21 @@ check_winner = lambda {
 players_finish_turn = lambda {
   system 'clear'
 
+  puts "\t
+  \t░██████╗░░█████╗░███╗░░░███╗███████╗  ░█████╗░██╗░░░██╗███████╗██████╗░
+  \t██╔════╝░██╔══██╗████╗░████║██╔════╝  ██╔══██╗██║░░░██║██╔════╝██╔══██╗
+  \t██║░░██╗░███████║██╔████╔██║█████╗░░  ██║░░██║╚██╗░██╔╝█████╗░░██████╔╝
+  \t██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░  ██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗
+  \t╚██████╔╝██║░░██║██║░╚═╝░██║███████╗  ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║
+  \t░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝  ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝ \n \n"
+
   case winner
   when 1
-    puts "#{game_trial.player1} won the Ruby's Tic Tac Toe"
+    puts "\t#{game_trial.player1} won the Ruby's Tic Tac Toe\t"
   when 2
-    puts "#{game_trial.player2} won the Ruby's Tic Tac Toe"
+    puts "\t#{game_trial.player2} won the Ruby's Tic Tac Toe\t"
   else
-    puts "It's a TIE \n \n Game over"
+    puts "\tIt's a TIE \n \n \tGame ove"
   end
 }
 
