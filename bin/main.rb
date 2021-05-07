@@ -94,6 +94,7 @@ game_trial.start
 # Variable can control the iterations
 number_turn = 0
 iterator = 0
+winner = 0
 game_state = true
 
 # To Provide turns for each one player
@@ -138,24 +139,29 @@ player2_turn = lambda {
   end
 }
 
+#Compare results to see if there are winner so far
+check_winner = lambda {
+  combinations_likely_to_win.each do |i|
+    iterator = i if ((i == game_trial.player1_marker) || (i == game_trial.player2_marker))
+  end
+  if iterator == game_trial.player1_marker
+    winner = 1
+  elsif iterator == game_trial.player2_marker
+    winner = 2
+  end 
+}
+
 # To Check out what is the game result
 players_finish_turn = lambda {
   system 'clear'
-  random_result = rand(1...4)
 
-  case random_result
+  case winner
   when 1
     puts "#{game_trial.player1} won the Ruby's Tic Tac Toe"
   when 2
     puts "#{game_trial.player2} won the Ruby's Tic Tac Toe"
   else
     puts "It's a TIE \n \n Game over"
-  end
-}
-
-check_winner = lambda {
-  combinations_likely_to_win.each do |i|
-    iterator = i if ((i == game_trial.player1_marker) || (i == game_trial.player2_marker))
   end
 }
 
@@ -172,7 +178,6 @@ while game_state
       player2_turn.call
     end
 end
-
 
 # Show results when game finish
 players_finish_turn.call
