@@ -26,7 +26,8 @@ end
 # Class to include attributes/methods of Game and saving names for each player
 class Players < Game
   attr_reader :player1, :player2
-  @@marker = [], @@marker2 = []
+  @@marker = []
+  @@marker2 = []
 
   def initialize(player1, player2)
     super
@@ -42,9 +43,9 @@ class Players < Game
     @i += 1
   end
 
-  def save_marker_player2(move_selected)
-    @move_selected = move_selected
-    @@marker2[@j] = move_selected 
+  def save_marker_player2(move_selected2)
+    @move_selected2 = move_selected2
+    @@marker2[@j] = move_selected2
     @j += 1
   end
   
@@ -92,35 +93,49 @@ game_trial.start
 
 # Variable can control the iterations
 number_turn = 0
-game_turn = true
+iterator = 0
+game_state = true
 
 # To Provide turns for each one player
-players_turn = lambda {
+player1_turn = lambda {
   system 'clear'
 
-  game_trial.display_board
-  puts "It's #{game_trial.player1}'s turn \n"
-  puts "Reminder: You're 'X"
-  puts 'Please select a a number between 1 to 9 according to the board.'
-  x_selected = gets.chomp.to_i
-  until (1..9).include? x_selected
-    puts 'Invalid, please select a number between 1 to 9.'
+  if iterator != 0
+    next
+  else
+    game_trial.display_board
+    puts "It's #{game_trial.player1}'s turn \n"
+    puts "Reminder: You're 'X"
+    puts 'Please select a a number between 1 to 9 according to the board.'
     x_selected = gets.chomp.to_i
+    until (1..9).include? x_selected
+      puts 'Invalid, please select a number between 1 to 9.'
+      x_selected = gets.chomp.to_i
+    end
+    game_trial.save_marker_player1(x_selected)
+    print game_trial.player1_marker
+    sleep(1)
   end
-  game_trial.
+}
 
+player2_turn = lambda {
   system 'clear'
-
-  game_trial.display_board
-  puts "It's #{game_trial.player2}'s turn \n"
-  puts "Reminder: You're 'O"
-  puts 'Please select a a number between 1 to 9 according to the board.'
-  o_selected = gets.chomp.to_i
-  until (1..9).include? o_selected
-    puts 'Invalid, please select a number between 1 to 9.'
+  if iterator != 0
+    next
+  else
+    game_trial.display_board
+    puts "It's #{game_trial.player2}'s turn \n"
+    puts "Reminder: You're 'O"
+    puts 'Please select a a number between 1 to 9 according to the board.'
     o_selected = gets.chomp.to_i
+    until (1..9).include? o_selected
+      puts 'Invalid, please select a number between 1 to 9.'
+      o_selected = gets.chomp.to_i
+    end
+    game_trial.save_marker_player2(o_selected)
+    print game_trial.player2_marker
+    sleep(1)
   end
-  number_turn > 2 ? game_turn = false : number_turn += 1
 }
 
 # To Check out what is the game result
@@ -138,9 +153,24 @@ players_finish_turn = lambda {
   end
 }
 
+check_winner = lambda {
+  combinations_likely_to_win.each do |i|
+    iterator = i if ((i == game_trial.player1_marker) || (i == game_trial.player2_marker))
+  end
+}
+
 # Game Loop
-combinations_likely_to_win.each do |i|
-  players_turn.call unless i == game_trial.see_marker
+while game_state
+    if ((iterator == game_trial.player1_marker) || (iterator == game_trial.player2_marker))
+      puts "game_state = false"
+      game_state = false
+      break
+    else
+      check_winner.call
+      player1_turn.call
+      check_winner.call
+      player2_turn.call
+    end
 end
 
 
