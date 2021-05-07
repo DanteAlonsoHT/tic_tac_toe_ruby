@@ -26,23 +26,34 @@ end
 # Class to include attributes/methods of Game and saving names for each player
 class Players < Game
   attr_reader :player1, :player2
-  @@marker = []
+  @@marker = [], @@marker2 = []
 
   def initialize(player1, player2)
     super
     @player1 = player1
     @player2 = player2
     @i = 0
+    @j = 0
   end
 
-  def save_marker(move_selected)
+  def save_marker_player1(move_selected)
     @move_selected = move_selected
     @@marker[@i] = move_selected 
     @i += 1
   end
+
+  def save_marker_player2(move_selected)
+    @move_selected = move_selected
+    @@marker2[@j] = move_selected 
+    @j += 1
+  end
   
-  def see_marker
+  def player1_marker
     @@marker
+  end
+
+  def player2_marker
+    @@marker2
   end
 end
 
@@ -96,6 +107,7 @@ players_turn = lambda {
     puts 'Invalid, please select a number between 1 to 9.'
     x_selected = gets.chomp.to_i
   end
+  game_trial.
 
   system 'clear'
 
@@ -127,7 +139,10 @@ players_finish_turn = lambda {
 }
 
 # Game Loop
-players_turn.call while game_turn
+combinations_likely_to_win.each do |i|
+  players_turn.call unless i == game_trial.see_marker
+end
+
 
 # Show results when game finish
 players_finish_turn.call
