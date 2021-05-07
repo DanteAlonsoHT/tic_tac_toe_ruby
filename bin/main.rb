@@ -27,10 +27,9 @@ class Game
   end
 
   def moves_used(move_used)
-    if !move_used.nil?
-      @@moves_used[@n] = move_used
-      @n += 1
-    end
+    @@moves_used[@n] = move_used
+    @n += 1
+    @@moves_used.compact
   end
 
   def get_moves_used
@@ -46,6 +45,16 @@ class Game
         end
       end
     move_definetily_repeated
+    end
+  end
+
+  def update_board(pos_selected, new_element)
+    @game_board.each do |board_row|
+      (0..2).each do |board_element|
+        if board_row[board_element] == pos_selected
+          board_row[board_element] = new_element
+        end
+      end
     end
   end
 end
@@ -126,7 +135,7 @@ move_repeated = false
 player1_turn = lambda {
   system 'clear'
 
-  unless !(iterator == 0)
+  unless !(winner == 0)
 
     game_trial.display_board
     puts "It's #{game_trial.player1}'s turn \n"
@@ -139,10 +148,10 @@ player1_turn = lambda {
       move_repeated = game_trial.check_moves_repeated(x_selected)
     end
     game_trial.save_marker_player1(x_selected)
+    game_trial.update_board(x_selected, "X")
     game_trial.moves_used(x_selected)
-    print game_trial.player1_marker
-    puts nil
-    print game_trial.get_moves_used
+    system 'clear'
+    game_trial.display_board
     sleep(1)
   else
     next
@@ -151,7 +160,7 @@ player1_turn = lambda {
 
 player2_turn = lambda {
   system 'clear'
-  unless !(iterator == 0)
+  unless !(winner == 0)
 
     game_trial.display_board
     puts "It's #{game_trial.player2}'s turn \n"
@@ -164,10 +173,10 @@ player2_turn = lambda {
       move_repeated = game_trial.check_moves_repeated(o_selected)
     end
     game_trial.save_marker_player2(o_selected)
+    game_trial.update_board(o_selected, "O")
     game_trial.moves_used(o_selected)
-    print game_trial.player2_marker
-    puts nil
-    print game_trial.get_moves_used
+    system 'clear'
+    game_trial.display_board
     sleep(1)
   else
     next
@@ -176,12 +185,9 @@ player2_turn = lambda {
 
 # Compare results to see if there are winner so far
 check_winner = lambda {
-  combinations_likely_to_win.each do |i|
-    iterator = i if (i == game_trial.player1_marker) || (i == game_trial.player2_marker)
-  end
-  if iterator == game_trial.player1_marker
+  if combinations_likely_to_win.include?(game_trial.player1_marker)
     winner = 1
-  elsif iterator == game_trial.player2_marker
+  elsif combinations_likely_to_win.include?(game_trial.player2_marker)
     winner = 2
   end
 }
@@ -202,7 +208,7 @@ players_finish_turn = lambda {
 
 # Game Loop
 while game_state
-  if (iterator == game_trial.player1_marker) || (iterator == game_trial.player2_marker) || (game_trial.get_moves_used.length > 7)
+  if (winner != 0) || (game_trial.get_moves_used.length > 7)
     game_state = false
     break
   else
