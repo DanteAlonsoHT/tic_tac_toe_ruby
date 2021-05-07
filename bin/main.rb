@@ -1,7 +1,11 @@
 #!/usr/bin/env ruby
 
 class Game
-  def initialize(player1, player2); end
+  @@moves_used = []
+  @move_definetily_repeated = false
+  def initialize(_player1, _player2)
+    @n = 0
+  end
 
   def start
     system 'clear'
@@ -21,11 +25,34 @@ class Game
       puts i == 2 ? "\n +---+---+---+" : nil
     end
   end
-end
 
+  def moves_used(move_used)
+    if !move_used.nil?
+      @@moves_used[@n] = move_used
+      @n += 1
+    end
+  end
+
+  def get_moves_used
+    @@moves_used
+  end
+
+  def check_moves_repeated(move_likely_repeated)
+    move_definetily_repeated = false
+    if @@moves_used
+      @@moves_used.each do |value|
+        if value.to_i == move_likely_repeated
+          move_definetily_repeated = true  
+        end
+      end
+    move_definetily_repeated
+    end
+  end
+end
 # Class to include attributes/methods of Game and saving names for each player
 class Players < Game
   attr_reader :player1, :player2
+
   @@marker = []
   @@marker2 = []
 
@@ -38,17 +65,15 @@ class Players < Game
   end
 
   def save_marker_player1(move_selected)
-    @move_selected = move_selected
-    @@marker[@i] = move_selected 
+    @@marker[@i] = move_selected
     @i += 1
   end
 
   def save_marker_player2(move_selected2)
-    @move_selected2 = move_selected2
     @@marker2[@j] = move_selected2
     @j += 1
   end
-  
+
   def player1_marker
     @@marker
   end
@@ -86,69 +111,79 @@ puts "Let's start"
 
 sleep(3)
 
-#Combinations to win
+# Combinations to win
 combinations_likely_to_win = [[1, 2, 3], [2, 5, 8], [3, 6, 9], [4, 5, 6], [1, 4, 7], [1, 5, 9], [3, 5, 7], [7, 8, 9]]
 
 game_trial.start
 
 # Variable can control the iterations
-number_turn = 0
 iterator = 0
 winner = 0
 game_state = true
+move_repeated = false
 
 # To Provide turns for each one player
 player1_turn = lambda {
   system 'clear'
 
-  if iterator != 0
-    next
-  else
+  unless !(iterator == 0)
+
     game_trial.display_board
     puts "It's #{game_trial.player1}'s turn \n"
-    puts "Reminder: You're 'X"
-    puts 'Please select a a number between 1 to 9 according to the board.'
+    puts "Reminder: You're 'X'"
     x_selected = gets.chomp.to_i
-    until (1..9).include? x_selected
-      puts 'Invalid, please select a number between 1 to 9.'
+    move_repeated = game_trial.check_moves_repeated(x_selected)
+    unless (((1..9).include? x_selected) && !move_repeated)
+      puts "Invalid, please select a number between 1 to 9 and don' repeat them."
       x_selected = gets.chomp.to_i
+      move_repeated = game_trial.check_moves_repeated(x_selected)
     end
     game_trial.save_marker_player1(x_selected)
+    game_trial.moves_used(x_selected)
     print game_trial.player1_marker
+    puts nil
+    print game_trial.get_moves_used
     sleep(1)
+  else
+    next
   end
 }
 
 player2_turn = lambda {
   system 'clear'
-  if iterator != 0
-    next
-  else
+  unless !(iterator == 0)
+
     game_trial.display_board
     puts "It's #{game_trial.player2}'s turn \n"
-    puts "Reminder: You're 'O"
-    puts 'Please select a a number between 1 to 9 according to the board.'
+    puts "Reminder: You're 'O'"
     o_selected = gets.chomp.to_i
-    until (1..9).include? o_selected
-      puts 'Invalid, please select a number between 1 to 9.'
+    move_repeated = game_trial.check_moves_repeated(o_selected)
+    until ((1..9).include? o_selected) && !move_repeated
+      puts "Invalid, please select a number between 1 to 9 and don' repeat them."
       o_selected = gets.chomp.to_i
+      move_repeated = game_trial.check_moves_repeated(o_selected)
     end
     game_trial.save_marker_player2(o_selected)
+    game_trial.moves_used(o_selected)
     print game_trial.player2_marker
+    puts nil
+    print game_trial.get_moves_used
     sleep(1)
+  else
+    next
   end
 }
 
-#Compare results to see if there are winner so far
+# Compare results to see if there are winner so far
 check_winner = lambda {
   combinations_likely_to_win.each do |i|
-    iterator = i if ((i == game_trial.player1_marker) || (i == game_trial.player2_marker))
+    iterator = i if (i == game_trial.player1_marker) || (i == game_trial.player2_marker)
   end
   if iterator == game_trial.player1_marker
     winner = 1
   elsif iterator == game_trial.player2_marker
     winner = 2
-  end 
+  end
 }
 
 # To Check out what is the game result
@@ -167,16 +202,17 @@ players_finish_turn = lambda {
 
 # Game Loop
 while game_state
-    if ((iterator == game_trial.player1_marker) || (iterator == game_trial.player2_marker))
-      puts "game_state = false"
-      game_state = false
-      break
-    else
-      check_winner.call
-      player1_turn.call
-      check_winner.call
-      player2_turn.call
-    end
+  if (iterator == game_trial.player1_marker) || (iterator == game_trial.player2_marker) || (game_trial.get_moves_used.length > 7)
+    game_state = false
+    break
+  else
+    player1_turn.call
+    check_winner.call
+    puts "Iterator: #{iterator}"
+    puts "Movimientos usados: #{game_trial.get_moves_used.length}"
+    player2_turn.call
+    check_winner.call
+  end
 end
 
 # Show results when game finish
