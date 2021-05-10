@@ -28,4 +28,15 @@ class Players < Game
   def player2_marker
     @marker2.permutation(3).to_a
   end
+
+  def players_finish_turn
+    case @winner
+    when 1
+      "\t#{@player1} won the Ruby's Tic Tac Toe\t"
+    when 2
+      "\t#{@player2} won the Ruby's Tic Tac Toe\t"
+    else
+      "\tIt's a TIE"
+    end
+  end
 end
