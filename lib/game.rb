@@ -7,35 +7,17 @@ class Game
   def start
     system 'clear'
 
-    puts "
-      \t ██╗░░░░░░█████╗░░█████╗░██████╗░██╗███╗░░██╗░██████╗░░░░░░░░░░
-      \t ██║░░░░░██╔══██╗██╔══██╗██╔══██╗██║████╗░██║██╔════╝░░░░░░░░░░
-      \t ██║░░░░░██║░░██║███████║██║░░██║██║██╔██╗██║██║░░██╗░░░░░░░░░░
-      \t ██║░░░░░██║░░██║██╔══██║██║░░██║██║██║╚████║██║░░╚██╗░░░░░░░░░
-      \t ███████╗╚█████╔╝██║░░██║██████╔╝██║██║░╚███║╚██████╔╝██╗██╗██╗
-      \t ╚══════╝░╚════╝░╚═╝░░╚═╝╚═════╝░╚═╝╚═╝░░╚══╝░╚═════╝░╚═╝╚═╝╚═╝"
-
-    # Create Variable to Tic tac toe's board
     @game_board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
   end
 
-  # Display the Tic tac toe's board
-  def display_board
-    (0..2).each do |i|
-      puts "\t +---+---+---+"
-      print "\t"
-      (0..7).each do |j|
-        print ' | ' unless j.odd?
-        print @game_board[i][((j * 3) / 7).to_i] unless j.even?
-      end
-      puts i == 2 ? "\n\t +---+---+---+" : "\t nil"
-    end
+  def return_game_board
+    @game_board
   end
 
   def moves_used(move_used)
     @moves_used[@n] = move_used
     @n += 1
-    @moves_used.compact
+    @moves_used = @moves_used.compact
   end
 
   def read_moves_used
@@ -43,10 +25,10 @@ class Game
   end
 
   def check_moves_repeated(move_likely_repeated)
-    return false unless @moves_used
+    return false if @moves_used.empty?
 
     @moves_used.each do |value|
-      return true unless value.to_i != move_likely_repeated
+      return true if value.to_i == move_likely_repeated
     end
     false
   end

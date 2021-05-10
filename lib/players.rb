@@ -1,4 +1,3 @@
-# Class to include attributes/methods of Game and saving names for each player
 class Players < Game
   attr_reader :player1, :player2
 
