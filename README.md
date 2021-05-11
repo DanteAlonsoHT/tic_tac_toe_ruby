@@ -10,7 +10,7 @@ As you can see in this repository, the main idea is to create one of the most po
 
 ***
 
-The game Tic tac toe _(also called Noughts and crosses, Xs and Os, XOX Game)_ is a too popular game around the world, it simple and quickly game to play it with peopel of all ages and provide brain workout too for anybody. Try to place at first 3 Xs / 3 Os in a vertical, horizontal or diagonal row to win the game.
+The game Tic tac toe _(also called Noughts and crosses, Xs and Os, XOX Game)_ is a too popular game around the world, it simple and quick game to play with people of all ages and provide brain workout too for anybody. Try to place at first 3 Xs / 3 Os in a vertical, horizontal, or diagonal row to win the game.
 
 <img src="img/tic_tac_toe_capture_1.PNG" alt="tic_tac_toe_img1" style="display: block; margin: 0 auto;">
 
@@ -33,7 +33,7 @@ Follow the next steps to start to play Tic Tac Toe.
     - For MAC Os <br>
         Open _"Launchpad"_ or type **F4** <br>
         Then click on _"Others group files"_ <br>
-        Finally click on _"Terminal"_ <br>
+        Finally, click on _"Terminal"_ <br>
 
 2.- Use _"cd" + file-path_ to stay in the game's folder. <br>
     For example: `cd C:\Users\Dante\Documents\tic_tac_toe_ruby` <br>
