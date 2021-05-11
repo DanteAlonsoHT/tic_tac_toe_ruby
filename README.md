@@ -1,6 +1,6 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet) ![](<https://img.shields.io/badge/-Ruby-rgb(199%2C%2032%2C%2039)?style=plastic&logo=ruby>)
 
-# OOP - Tic Tac Toe game using Ruby 🙉  <img src="https://image.flaticon.com/icons/png/512/919/919842.png" height="64" width="64">
+# OOP - Tic Tac Toe game using Ruby 🙉  <img src="https://image.flaticon.com/icons/png/512/919/919842.png" height="32" width="32">
 
 > This repository is about an example of how to build your own tic tac toe game from scratch using Ruby.
 
