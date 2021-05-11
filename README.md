@@ -32,8 +32,8 @@ Follow the next steps to start to play Tic Tac Toe.
         Finally click on _"Terminal"_ <br>
 
 2.- Use _"cd" + file-path_ to stay in the game's folder. <br>
-    For example: ´_cd C:\Users\Dante\Documents\tic_tac_toe_ruby_´ <br>
-3.- Now type 'ruby bin/main.rb' to start up the Tic Tac Toe's game. <br>
+    For example: `_cd C:\Users\Dante\Documents\tic_tac_toe_ruby_` <br>
+3.- Now type `ruby bin/main.rb` to start up the Tic Tac Toe's game. <br>
 4.- Have fun (It's mandatory to accomplish this step).
 
 ### Rules 📜
@@ -55,9 +55,9 @@ Follow the next steps to start to play Tic Tac Toe.
 
 To get a local copy up and running follow these simple example steps.
 - Open terminal
-- Clone this project by command git clone https://github.com/DanteAlonsoHT/tic_tac_toe_ruby.git
-- Cd tic_tac_toe_ruby folder
-- Run bin/main.rb with Ruby in your terminal
+- Clone this project by command `git clone https://github.com/DanteAlonsoHT/tic_tac_toe_ruby.git`
+- `Cd tic_tac_toe_ruby` folder
+- Run `bin/main.rb` with Ruby in your terminal
 
 ## Getting Started 
 
@@ -98,6 +98,7 @@ Give a ⭐️ if you like this project!
 - Inspiration 💘
 - Microverse program ⚡
 - My standup team 🏹
+- My family's support 🙌
 
 ## 📝 License
 
