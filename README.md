@@ -10,6 +10,26 @@ As you can see in this repository, the main idea is to create one of the most po
 
 The game Tic tac toe (also called Noughts and crosses, Xs and Os, XOX Game) is a too popular game around the world, it simple and quickly game to play it with peopel of all ages and provide brain workout too for anybody. Try to place at first 3 Xs / 3 Os in a vertical, horizontal or diagonal row to win the game.
 
+# How to play
+
+Follow the next steps to start to play Tic Tac Toe.
+
+1.- Use your terminal, search it in your PC or hit at the same time the next keyboard shortcuts:
+- For Windows:
+    Windows + R
+    Then type "cmd" and hit Enter
+- For Ubuntu:
+    Ctrl + Alt + T
+    Then type "gnome-terminal" and hit Enter
+For MAC Os
+    Open "Launchpad" or type F4
+    Then click on Others group files
+    Finally click on "Terminal"
+2.- Use 'cd' + file-path to stay in the game's folder.
+    For example: _cd C:\Users\Dante\Documents\tic_tac_toe_ruby_
+3.- Now type 'ruby bin/main.rb' to start up the Tic Tac Toe's game.
+4.- Have fun (It's mandatory to accomplish this step).
+
 ## Built With 🔨
 
 - Ruby
