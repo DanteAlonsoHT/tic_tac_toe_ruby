@@ -32,7 +32,7 @@ Follow the next steps to start to play Tic Tac Toe.
         Finally click on _"Terminal"_ <br>
 
 2.- Use _"cd" + file-path_ to stay in the game's folder. <br>
-    For example: `_cd C:\Users\Dante\Documents\tic_tac_toe_ruby_` <br>
+    For example: `cd C:\Users\Dante\Documents\tic_tac_toe_ruby` <br>
 3.- Now type `ruby bin/main.rb` to start up the Tic Tac Toe's game. <br>
 4.- Have fun (It's mandatory to accomplish this step).
 
