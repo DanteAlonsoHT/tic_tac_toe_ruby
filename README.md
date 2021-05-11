@@ -19,16 +19,16 @@ The game Tic tac toe (also called Noughts and crosses, Xs and Os, XOX Game) is a
 Follow the next steps to start to play Tic Tac Toe.
 
 1.- Use your terminal, search it in your PC or hit at the same time the next keyboard shortcuts:
-- For Windows: <br>
-    **Windows** + **R** <br>
-    Then type _"cmd"_ and hit **Enter** <br>
-- For Ubuntu: <br>
-    **Ctrl** + **Alt** + **T** <br>
-    Then type _"gnome-terminal"_ and hit **Enter** <br>
-For MAC Os <br>
-    Open _"Launchpad"_ or type **F4** <br>
-    Then click on _"Others group files"_ <br>
-    Finally click on _"Terminal"_ <br>
+    - For Windows: <br>
+        **Windows** + **R** <br>
+        Then type _"cmd"_ and hit **Enter** <br>
+    - For Ubuntu: <br>
+        **Ctrl** + **Alt** + **T** <br>
+        Then type _"gnome-terminal"_ and hit **Enter** <br>
+    - For MAC Os <br>
+        Open _"Launchpad"_ or type **F4** <br>
+        Then click on _"Others group files"_ <br>
+        Finally click on _"Terminal"_ <br>
 2.- Use _"cd" + file-path_ to stay in the game's folder. <br>
     For example: _cd C:\Users\Dante\Documents\tic_tac_toe_ruby_ <br>
 3.- Now type 'ruby bin/main.rb' to start up the Tic Tac Toe's game. <br>
@@ -38,10 +38,10 @@ For MAC Os <br>
 
 ---
 
-1. Type player_1 name, it will use 'X' symbol in the game.
-2. Type player_2 name, it will use 'O' symbol in the game.
-3. The game will show you who starts, must use a number between (1..9) available in the game, don't repeat them until finish the current match.
-4. The first one who places at first 3 Xs / 3 Os in a vertical, horizontal or diagonal row will win the game.
+1. Type _player_1 name_, it will use the **'X'** symbol in the game.
+2. Type _player_2 name_, it will use the **'O'** symbol in the game.
+3. The game will show you who starts, **must use a number between (1..9)** available in the game, don't repeat them until finish the current match.
+4. The first one who places at first 3 Xs / 3 Os in a vertical, horizontal, or diagonal row will win the game.
 
 ## Built With 🔨
 
