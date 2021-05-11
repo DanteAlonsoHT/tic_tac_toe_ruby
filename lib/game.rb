@@ -1,6 +1,6 @@
 class Game
   def initialize(_player1, _player2)
-    @n = 0
+    @array_position = 0
     @moves_used = []
     @combinations_likely_to_win = [[1, 2, 3], [2, 5, 8], [3, 6, 9], [4, 5, 6], [1, 4, 7], [1, 5, 9], [3, 5, 7],
                                    [7, 8, 9]]
@@ -24,8 +24,8 @@ class Game
   end
 
   def moves_used(move_used)
-    @moves_used[@n] = move_used
-    @n += 1
+    @moves_used[@array_position] = move_used
+    @array_position += 1
     @moves_used = @moves_used.compact
   end
 
