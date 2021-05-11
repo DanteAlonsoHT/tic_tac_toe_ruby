@@ -6,6 +6,10 @@
 
 As you can see in this repository, the main idea is to create one of the most popular games in history (Tic Tac Toe) using Ruby as the programming language, then the repository is to improve the OOP (Object Oriented Programming) concepts by making Tic Tac Toe game.
 
+## Game Description
+
+The game Tic tac toe (also called Noughts and crosses, Xs and Os, XOX Game) is a too popular game around the world, it simple and quickly game to play it with peopel of all ages and provide brain workout too for anybody. Try to place at first 3 Xs / 3 Os in a vertical, horizontal or diagonal row to win the game.
+
 ## Built With 🔨
 
 - Ruby
