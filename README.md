@@ -30,6 +30,13 @@ For MAC Os
 3.- Now type 'ruby bin/main.rb' to start up the Tic Tac Toe's game.
 4.- Have fun (It's mandatory to accomplish this step).
 
+# Rules
+
+1. Type player_1 name, it will use 'X' symbol in the game.
+2. Type player_2 name, it will use 'O' symbol in the game.
+3. The game will show you who starts, must use a number between (1..9) available in the game, don't repeat them until finish the current match.
+4. The first one who places at first 3 Xs / 3 Os in a vertical, horizontal or diagonal row will win the game.
+
 ## Built With 🔨
 
 - Ruby
